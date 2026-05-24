@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Wardrobe for {{ plan.destination }} — Wardrobe Pick</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="results-page">
+
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <!-- Nav bar -->
+  <nav class="results-nav">
+    <a href="/" class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">Wardrobe Pick</span>
+    </a>
+    <div class="nav-links-right">
+      <a href="/my-wardrobe" class="nav-link">My Wardrobe</a>
+      <a href="/" class="btn-back">← Plan Another Trip</a>
+    </div>
+  </nav>
+
+  <main class="results-main">
+
+    <!-- Hero summary -->
+    <section class="results-hero">
+      <div class="results-hero-inner">
+        <div class="destination-badge">
+          <span class="climate-icon">
+            {% if plan.climate == "hot" %}☀️
+            {% elif plan.climate == "warm" %}🌤️
+            {% elif plan.climate == "mild" %}🍂
+            {% else %}❄️
+            {% endif %}
+          </span>
+          <span>{{ plan.season }} in {{ plan.destination }}</span>
+        </div>
+        <h1>Your {{ plan.days }}-Day<br><em>Capsule Wardrobe</em></h1>
+        <p class="results-subtitle">{{ plan.total_outfits }} curated outfits, packed perfectly for {{ plan.destination }}.</p>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-number">{{ plan.days }}</span>
+            <span class="stat-label">Days</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">{{ plan.total_outfits }}</span>
+            <span class="stat-label">Outfits</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            {% set item_count = namespace(n=0) %}
+            {% for o in plan.outfits %}{% set item_count.n = item_count.n + o["items"]|length %}{% endfor %}
+            <span class="stat-number">{{ item_count.n }}</span>
+            <span class="stat-label">Pieces</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">{{ plan.climate|title }}</span>
+            <span class="stat-label">Climate</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outfits grid -->
+    <section class="outfits-section">
+      <h2 class="section-title">Your Outfits</h2>
+
+      <div class="outfits-grid">
+        {% for outfit in plan.outfits %}
+        <article class="outfit-card outfit-style-{{ outfit.style }}" style="--card-index: {{ loop.index0 }}">
+          <div class="outfit-card-header">
+            <div class="outfit-label-row">
+              <span class="outfit-badge outfit-badge-{{ outfit.style }}">
+                {% if outfit.style == "casual" %}👕 Casual
+                {% elif outfit.style == "evening" %}🌙 Evening
+                {% elif outfit.style == "smart-casual" %}👔 Smart Casual
+                {% endif %}
+              </span>
+            </div>
+            <h3 class="outfit-title">{{ outfit.label }}</h3>
+          </div>
+
+          <div class="outfit-items-grid">
+            {% for item in outfit["items"] %}
+            <div class="item-card">
+              <div class="item-img-wrap">
+                <img
+                  src="{{ item.image }}"
+                  alt="{{ item.name }}"
+                  class="item-img"
+                  loading="lazy"
+                  onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80'"
+                />
+                <span class="item-category-tag">{{ item.category }}</span>
+              </div>
+              <div class="item-info">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-color">
+                  <span class="color-dot" style="background: {{ item.color if item.color not in ('floral','multicolor','pattern') else '#c8a882' }}"></span>
+                  {{ item.color|title }}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Packing tips -->
+    <section class="tips-section">
+      <div class="tips-card">
+        <div class="tips-header">
+          <span class="tips-icon">💡</span>
+          <h2>Packing Tips for {{ plan.destination }}</h2>
+        </div>
+        <ul class="tips-list">
+          {% for tip in plan.tips %}
+          <li class="tip-item">
+            <span class="tip-bullet">✓</span>
+            <span>{{ tip }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <p>Heading somewhere else?</p>
+      <a href="/" class="btn-generate">
+        <span class="btn-text">Plan Another Trip</span>
+        <span class="btn-icon">→</span>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Wardrobe Pick MVP &mdash; pack less, explore more.</p>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

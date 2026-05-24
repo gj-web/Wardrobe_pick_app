@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wardrobe Pick — Pack Less, Style More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="home-page">
+
+  <!-- Decorative background blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">Wardrobe Pick</span>
+    </div>
+    <p class="tagline">Your capsule wardrobe, curated for wherever you're going.</p>
+    <nav class="header-nav">
+      <a href="/" class="nav-link nav-link--active">Trip Planner</a>
+      <a href="/my-wardrobe" class="nav-link">My Wardrobe</a>
+    </nav>
+  </header>
+
+  <main class="home-main">
+    <div class="hero-text">
+      <h1>Pack <em>smart.</em><br>Travel <em>light.</em></h1>
+      <p class="hero-sub">Tell us where you're headed and we'll build your perfect travel wardrobe — no overpacking, no regrets.</p>
+    </div>
+
+    <!-- Trip Planner Form -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <h2>Plan Your Trip</h2>
+        <p>Just three details. That's all we need.</p>
+      </div>
+
+      <form action="/generate" method="post" class="trip-form" id="tripForm">
+
+        <div class="field-group">
+          <label for="destination">
+            <span class="field-icon">📍</span>
+            <span>Destination</span>
+          </label>
+          <input
+            type="text"
+            id="destination"
+            name="destination"
+            placeholder="e.g. Ohrid, Paris, Tokyo…"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="days">
+              <span class="field-icon">📅</span>
+              <span>Number of Days</span>
+            </label>
+            <input
+              type="number"
+              id="days"
+              name="days"
+              min="1"
+              max="30"
+              placeholder="e.g. 5"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="season">
+              <span class="field-icon">🌡️</span>
+              <span>Season / Climate</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="season" name="season" required>
+                <option value="" disabled selected>Choose climate…</option>
+                <option value="hot">☀️ Hot (Summer)</option>
+                <option value="warm">🌤️ Warm (Spring)</option>
+                <option value="mild">🍂 Mild (Autumn)</option>
+                <option value="cold">❄️ Cold (Winter)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-generate" id="submitBtn">
+          <span class="btn-text">Build My Wardrobe</span>
+          <span class="btn-icon">→</span>
+          <div class="btn-loader hidden">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Feature pills -->
+    <div class="features">
+      <div class="feature-pill">🎒 Capsule-focused</div>
+      <div class="feature-pill">🔄 Mix &amp; match ready</div>
+      <div class="feature-pill">🌍 Climate-aware</div>
+      <div class="feature-pill">✨ No overpacking</div>
+    </div>
+
+    <!-- My Wardrobe CTA section -->
+    <div class="wardrobe-cta-section">
+      <div class="wardrobe-cta-inner">
+        <div class="wardrobe-cta-icon">👗</div>
+        <div class="wardrobe-cta-text">
+          <h3>Build Your Personal Wardrobe</h3>
+          <p>Add your own outfits with photos, tags, and notes. Keep track of what you own and love.</p>
+        </div>
+        <a href="/my-wardrobe" class="btn-secondary">
+          <span>My Wardrobe</span>
+          <span class="btn-icon">→</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Wardrobe Pick — pack less, explore more.</p>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

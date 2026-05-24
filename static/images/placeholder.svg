@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <rect width="400" height="500" fill="#f5efe6"/>
+  <rect x="160" y="180" width="80" height="80" rx="8" fill="#e8e4de"/>
+  <text x="200" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#7a7774">No Photo</text>
+  <text x="200" y="330" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#c4a898">👗</text>
+</svg>
