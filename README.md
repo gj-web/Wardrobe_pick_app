@@ -95,5 +95,5 @@ wardrobe_pick/
 - The trip planner is rule-based; swap `services/outfit_generator.py` with an LLM call for AI recommendations
 
 ## Team
-Lina Dimova
-Eva Gjorgjova
+- Eva Gjorgjova
+- Lina Dimova
